@@ -1,0 +1,39 @@
+{
+  "cli": {
+    "version": ">= 9.1.0",
+    "promptToConfigurePushNotifications": false
+  },
+  "build": {
+    "base": {
+      "ios": {
+        "autoIncrement": "buildNumber"
+      },
+      "channel": "base",
+      "node": "19.4.0"
+    },
+    "development": {
+      "extends": "base",
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "dev_client": {
+      "extends": "base",
+      "developmentClient": true,
+      "distribution": "internal",
+      "channel": "dev_client",
+      "env": {
+        "APP_ENV": "development"
+      }
+    },
+    "preview": {
+      "distribution": "internal"
+    },
+    "production": {
+      "extends": "base",
+      "channel": "production",
+      "env": {
+        "APP_ENV": "production"
+      }
+    }
+  }
+}
