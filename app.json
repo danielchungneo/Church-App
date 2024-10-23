@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "qnai-app",
-    "slug": "qnai-app",
+    "name": "serve-together",
+    "slug": "serve-together",
     "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -22,8 +22,8 @@
         "NSPhotoLibraryUsageDescription": "$(PRODUCT_NAME) would like access to your photos. By allowing access to your photos, you will be able to select images to use for your property photos or posting profile pictures.",
         "NSPhotoLibraryAddUsageDescription": "Allow $(PRODUCT_NAME) to save photos."
       },
-      "bundleIdentifier": "com.danielchungmoreland.qnaiapp",
-      "buildNumber": "2"
+      "bundleIdentifier": "com.danielchungmoreland.servetogether",
+      "buildNumber": "1"
     },
     "android": {
       "adaptiveIcon": {
@@ -46,11 +46,6 @@
           "cameraPermissionText": "In order to upload Profile Pictures or Route Images using your camera functionality, $(PRODUCT_NAME) needs access to your camera."
         }
       ]
-    ],
-    "extra": {
-      "eas": {
-        "projectId": "9504df14-cd8b-4082-b808-95d23639b948"
-      }
-    }
+    ]
   }
 }
