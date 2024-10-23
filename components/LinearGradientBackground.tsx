@@ -7,7 +7,7 @@ type LinearGradientBackgroundProps = {
     colors?: string[];
 };
 
-function LinearGradientBackground({ children, colors=['#00483f', '#2e2e48', '#0f1324'] }: LinearGradientBackgroundProps) {
+function LinearGradientBackground({ children, colors=["#256396",'#4682b4',  '#cccccc' ] }: LinearGradientBackgroundProps) {
     return (
         <Box flex={1}>
             <LinearGradient

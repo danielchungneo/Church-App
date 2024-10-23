@@ -4,12 +4,12 @@ import { useColorScheme } from "react-native";
 
 export const Colors =
 {
-    PRIMARY: "#29253c",
-    SECONDARY: "#37334c",
+    PRIMARY: "#ffffff",
+    SECONDARY: "#4682b4",
     TEXT: "#ededed",
     INPUT: "#a8aeb6",
     ERROR: "#DC2626",
-    BLUE: "#4884d3",
+    BLUE: "#256396",
     SUCCESS: "#66b56c",
     BLACK: "#000000",
     TAN: "#968265",

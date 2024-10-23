@@ -89,7 +89,7 @@ export default function Home() {
     if (!email || !password) {
       Toast.show({
         type: 'error',
-        text1: 'Login Failed',
+        text1: 'Login Credentials are incorrect',
       })
     } else {
       if (isRememberMe) {

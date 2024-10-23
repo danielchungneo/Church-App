@@ -29,7 +29,7 @@ function LoginBlock({ email, setPassword, password, setEmail, isInvalidCredentia
             <StyledInputField iconName="user" placeholderText="Email" value={email} isInvalid={isInvalidCredentials} onChange={handleChangeEmail} />
             <StyledInputField iconName="key" placeholderText="Password" fieldType="password" value={password} isInvalid={isInvalidCredentials} onChange={handleChangePassword} />
             <Checkbox aria-label="Remember Me" size="md" isInvalid={false} isDisabled={false} isChecked={isRememberMe} onChange={handleRemeberMe} value="rememberMeCheckbox">
-                <CheckboxIndicator mr="$2">
+                <CheckboxIndicator mr="$2" borderColor="white" borderWidth={isRememberMe ? 0 : 2}>
                     <CheckboxIcon color={Colors.TEXT} as={CheckIcon} />
                 </CheckboxIndicator>
                 <CheckboxLabel color="$white">Remember Me?</CheckboxLabel>

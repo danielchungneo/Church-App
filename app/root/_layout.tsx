@@ -40,7 +40,8 @@ export default function AppLayout() {
       const diffInMinutes = diff / 1000 / 60;
 
       if (diffInMinutes > 120) {
-        router.dismissAll();
+        // Commenting this out for now so I don't get locked out
+        // router.dismissAll();
       }
 
     }

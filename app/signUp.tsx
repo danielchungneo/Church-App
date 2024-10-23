@@ -1,6 +1,6 @@
 import StyledInputField from "@/components/FormInputs/StyledInputs/StyledInputField";
 import { AntDesign, FontAwesome6, Ionicons } from "@expo/vector-icons";
-import { Box, Button, ButtonText, Center, HStack, Heading, Icon, KeyboardAvoidingView, LinearGradient, SafeAreaView, ScrollView, Text, VStack, set, useToast } from "@gluestack-ui/themed";
+import { Box, Button, ButtonText, Center, HStack, Heading, Icon, Image, KeyboardAvoidingView, LinearGradient, SafeAreaView, ScrollView, Text, VStack, set, useToast } from "@gluestack-ui/themed";
 import { LinearGradient as ExpoLinearGradient } from 'expo-linear-gradient';
 import { Link } from "expo-router";
 import { useEffect, useState } from "react";
@@ -18,11 +18,14 @@ const LogoBlock = () => {
     return (
         <HStack flex={0} justifyContent="space-between" alignItems="center" mt={"$16"} space="md">
             <Center h={"$32"} w={"$32"} bg="$white" borderRadius={"$3xl"} backgroundColor={'rgba(255, 255, 255, 0.4)'} >
-                <AntDesign name="API" size={75} color="black" />
+                <Box flex={1} justifyContent="center" height alignItems="center" width="$full" >
+
+                    <Image alt="logo" width="85%" height="85%" source={require('../assets/images/good-naz-logo.png')} />
+                </Box>
             </Center>
             <Center flex={1}>
-                <Text color="white" size="4xl" textAlign="center">QN-AI</Text>
-                <Text color="white" italic size="sm" textAlign="center">I mean, who even needs QA's</Text>
+                <Text color="white" size="4xl" textAlign="center">GoodNaz</Text>
+                <Text color="white" italic size="sm" textAlign="center">Goodlettsville, TN</Text>
             </Center>
         </HStack>
     )
@@ -62,9 +65,9 @@ const SignUp = () => {
         await AsyncStorage.setItem("lastUser", JSON.stringify({ email, password }));
         if (!data?.firstName) {
             router.push("/root/Onboarding")
-          } else {
+        } else {
             router.push({ pathname: "/root/home" });
-          }
+        }
     };
 
     function onSuccess(data: any) {
@@ -170,7 +173,7 @@ const SignUp = () => {
                                             <Text color={"$red500"}>{errorMessage}</Text>
                                         </HStack>
                                     )}
-                                    <Button  h={"$12"} width={"$full"} borderRadius={"$full"} onPress={handleSignUp} mt={"$2"}>
+                                    <Button h={"$12"} width={"$full"} borderRadius={"$full"} onPress={handleSignUp} mt={"$2"}>
                                         <ButtonText color={Colors.TEXT}>{loading ? "Loading..." : "Sign Up"}</ButtonText>
                                     </Button>
                                     <Box alignItems="center">

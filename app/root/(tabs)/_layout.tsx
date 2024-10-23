@@ -15,18 +15,22 @@ import { USER_ROLES } from "@/enum/Roles";
 import useGetRequest from "@/hooks/useGetRequest";
 import api from "@/constants/api";
 import { PortalProvider } from "@gorhom/portal";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 
 
 
 function TabBarIcon({ iconLibrary = "FontAwesome", ...props }: {
-  iconLibrary?: "FontAwesome" | "FontAwesome5";
+  iconLibrary?: "FontAwesome" | "FontAwesome5" | "MaterialCommunityIcons";
   name: React.ComponentProps<typeof FontAwesome | typeof FontAwesome5>["name"];
   color: string;
 }) {
   if (iconLibrary === "FontAwesome5") {
     return <FontAwesome5 size={18} style={{ marginBottom: -3 }} {...props} />;
-  } else {
+  } else if (iconLibrary === "MaterialCommunityIcons") {
+    return <MaterialCommunityIcons size={23} style={{ marginBottom: -3 }} {...props} />;
+  }
+    else {
     return <FontAwesome size={18} style={{ marginBottom: -3 }} {...props} />;
   }
 }
@@ -75,18 +79,47 @@ export default function TabLayout({ }: TabLayoutProps) {
           headerStyle: {
             backgroundColor: Colors.SECONDARY,
           },
+          tabBarActiveTintColor: Colors.PRIMARY,
+          tabBarInactiveTintColor: "black",
 
         }}
       >
         <Tabs.Screen
           name="home"
           options={{
-            title: "Home",
+            title: "Events",
             headerTitleStyle: {
               color: Colors.TEXT,
             },
+
             tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
-            tabBarLabel: "Home",
+            tabBarLabel: "Events",
+          }}
+        />
+        <Tabs.Screen
+          name="service"
+          options={{
+            title: "Service",
+            headerTitleStyle: {
+              color: Colors.TEXT,
+            },
+            tabBarIcon: ({ color }) => <TabBarIcon name="hand-heart" color={color} iconLibrary="MaterialCommunityIcons"/>,
+            href: {
+              pathname: "/root/service",
+            }
+          }}
+        />
+        <Tabs.Screen
+          name="prayer"
+          options={{
+            title: "Prayer Requests",
+            headerTitleStyle: {
+              color: Colors.TEXT,
+            },
+            tabBarIcon: ({ color }) => <TabBarIcon name="hands-pray" color={color} iconLibrary="MaterialCommunityIcons" />,
+            href: {
+              pathname: "/root/prayer",
+            }
           }}
         />
         <Tabs.Screen
@@ -97,9 +130,10 @@ export default function TabLayout({ }: TabLayoutProps) {
               color: Colors.TEXT,
             },
             tabBarIcon: ({ color }) => <TabBarIcon name="cogs" color={color} />,
-            href: {
-              pathname: "/root/settings",
-            }
+            href: null
+            // href: {
+            //   pathname: "/root/settings",
+            // }
           }}
         />
       </Tabs>
