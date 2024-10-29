@@ -1,34 +1,61 @@
+import UncontrolledSwitch from "@/components/FormInputs/Uncontrolled/UncontrolledSwitch";
 import ScrollableList from "@/components/Lists/ScrollableList";
 import MainContainer from "@/components/MainContainer";
+import PrayerFilterModal from "@/components/Modals/PrayerFilterModal";
+import PrayerCard from "@/components/PrayerCard";
+import { Colors } from "@/enum/Colors";
 import { AuthorizeComponent } from "@/utils/data";
-import { Box, Text, VStack } from "@gluestack-ui/themed";
+import { Feather, MaterialIcons } from "@expo/vector-icons";
+import { Box, Fab, FabIcon, HStack, ScrollView, Text, VStack } from "@gluestack-ui/themed";
 import { router } from "expo-router";
+import { useState } from "react";
 
-type SettingsScreenProps = {
+type PrayerScreenProps = {
     //
 };
 
-function SettingsScreen({ }: SettingsScreenProps) {
-    const configurationOptions = [
-    ]
+function PrayerScreen({ }: PrayerScreenProps) {
+    const [isShowCompletedPrayers, setIsShowCompletedPrayers] = useState(true);
+  const [showFilterModal, setShowFilterModal] = useState(false)
 
-    const settingOptions = [
-        { name: "User Management", pathname: "usersManagement" },
-    ]
 
-    const handlePressConfigurationItem = (item: any) => {
-        console.log("This does nothing!")
-        // router.push({ pathname: `/tabs/Configurations/${item.pathname}` })
+    const handleAddPrayerRequest = () => {
+        console.log("Add Prayer Request");
     }
+
+    const handleOpenFilterModal = () => {
+        setShowFilterModal(true)
+    }
+
     return (
-        <MainContainer>
-            <VStack space="md" flex={1}>
-                <Box flex={1}>
-                    <ScrollableList options={settingOptions} idName="name" listName="Settings" handlePress={handlePressConfigurationItem} />
-                </Box>
-            </VStack>
+        <MainContainer isPadding={false}>
+            <PrayerFilterModal includeCompleted={isShowCompletedPrayers} showFilterModal={showFilterModal} onCloseModal={() => setShowFilterModal(false)} setIncludeCompleted={setIsShowCompletedPrayers}/>
+            <Fab
+                size="md"
+                placement="bottom right"
+                onPress={handleAddPrayerRequest}
+                // backgroundColor={Colors.SUCCESS}
+            >
+                <FabIcon as={Feather} name="plus" size={25} />
+            </Fab>
+            <Fab
+                size="md"
+                placement="bottom left"
+                onPress={handleOpenFilterModal}
+            >
+                <FabIcon as={MaterialIcons} name="filter-list-alt" size={25} />
+            </Fab>
+            <ScrollView paddingHorizontal="$3" paddingVertical="$4" >
+                <VStack space="lg" flex={1}>
+                    <PrayerCard />
+                    <PrayerCard isAnonymous />
+                    <PrayerCard />
+                    <PrayerCard isAnonymous />
+                </VStack>
+                <Box marginBottom="$24" />
+            </ScrollView>
         </MainContainer>
     );
 }
 
-export default SettingsScreen;
+export default PrayerScreen;

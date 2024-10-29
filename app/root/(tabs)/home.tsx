@@ -2,7 +2,7 @@ import UncontrolledSelectBox from "@/components/FormInputs/Uncontrolled/Uncontro
 import LinearGradientBackground from "@/components/LinearGradientBackground";
 import MainContainer from "@/components/MainContainer";
 import { Colors } from "@/enum/Colors";
-import { Text, Center, Heading, Divider, ButtonText, Button, Card, VStack, HStack, Box, RefreshControl, ScrollView } from "@gluestack-ui/themed";
+import { Text, Center, Heading, Divider, ButtonText, Button, Card, VStack, HStack, Box, RefreshControl, ScrollView, Image } from "@gluestack-ui/themed";
 import { useCallback, useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import ScrollableList from "@/components/Lists/ScrollableList";
@@ -12,75 +12,82 @@ import AddOrderModal from "@/components/Modals/AddOrderModal";
 import { formatDate } from "@/utils/data";
 import { usePathname, useRouter } from "expo-router";
 import HomeEventCard from "@/components/HomeEventCard";
+import { Linking, useWindowDimensions } from "react-native";
+import LogoBlock from "@/components/LoginScreenComponents/LogoBlock";
 
 export default function Home(props: any) {
-  const { sessionInfo } = useAuth();
-  const router = useRouter();
-  const pathname = usePathname();
 
-  const [orderData, setOrderData] = useState([]);
-  const [showAddOrderModal, setShowAddOrderModal] = useState(false);
+  const { height, width } = useWindowDimensions();
 
-  const getOrderData = async () => {
-    const orders = await AsyncStorage.getItem("orders");
-    if (orders) {
-      setOrderData(JSON.parse(orders));
-    } else {
-      setOrderData([])
-    }
-  }
+  const pictureDimensions = height * .2;
 
-  const handleCreateOrder = async (selectedOrderType: any) => {
-    console.log({ selectedOrderType })
-    const orderId = 24000000 + orderData.length + 1;
-    const newOrder = {
-      id: orderId,
-      orderTypeId: selectedOrderType.id,
-      orderType: selectedOrderType.name,
-      date: new Date().toISOString(),
-    }
-    const newOrders = [...orderData, newOrder];
-    setOrderData(newOrders);
-    await AsyncStorage.setItem("orders", JSON.stringify(newOrders));
-    setShowAddOrderModal(false);
-  }
-
-  const handleClearOrderData = async () => {
-    await AsyncStorage.removeItem("orders");
-    getOrderData();
-  }
-
-  useEffect(() => {
-    getOrderData();
-  }, []);
-
-  const orders = orderData;
-
-  const renderOrderItem = (order: any) => {
-    return (
-      <VStack>
-        <Text size="2xl" color={Colors.TEXT}>{order.orderType}</Text>
-        <HStack>
-          <Text size="xl" italic color={Colors.TEXT}>Order # {order.id}</Text>
-        </HStack>
-      </VStack>
-    )
-  }
-
-  const handlePressItem = (item: any) => {
-    const route = `root/Order/${item.id}`
-    router.push({ pathname: route })
+  const handleWatchOnline = () => {
+    Linking.openURL("https://www.youtube.com/@goodnazlive2356/streams")
   }
 
   return (
     <MainContainer isPadding={false}>
-      <ScrollView paddingHorizontal="$3" paddingVertical="$4" >
-        <VStack flex={1} space="xl">
-          <HomeEventCard />
-          <HomeEventCard title="Bonfire & Jam" uri="https://registrations-production.s3.amazonaws.com/uploads/event/logo/2537421/medium_image-1727707265726.png"/>
-          <HomeEventCard title="Trunk or Treat" uri="https://static.wixstatic.com/media/8cbf38_d014597947e64521af268c71626dd49b~mv2.jpg/v1/fill/w_454,h_256,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/Trunk%20or%20Treat.jpg" />
+      <ScrollView bounces={false}>
+        <VStack flex={1} height="$full" space="xs" backgroundColor="rgba(83, 130, 176, .8)">
+          <HStack flex={0} justifyContent="space-between" alignItems="center" space="md" >
+            <Box flex={2} alignItems="flex-end">
+              <Center h={"$32"} w={"$32"} borderRadius={"$3xl"} >
+                <Box flex={1} justifyContent="center" height alignItems="center" width="$full">
+                  <Image alt="logo" width="85%" height="85%" source={require('@/assets/images/good-naz-logo.png')} />
+                </Box>
+              </Center>
+            </Box>
+            <Center flex={3}>
+              <Text color="white" size="3xl" textAlign="center">GoodNaz</Text>
+              <Text color="white" italic size="sm" textAlign="center">Goodlettsville, TN</Text>
+            </Center>
+          </HStack>
+          <Box paddingBottom="$4">
+            <Text textAlign="center" italic fontSize="$xl" color={Colors.WHITE}>
+              Learning to Love God and One Another
+            </Text>
+          </Box>
         </VStack>
-        <Box marginBottom="$24"/>
+        <VStack mt="$4" paddingHorizontal="$2">
+          <VStack space="sm" p="$4" backgroundColor="rgba(83, 130, 176, 1)" borderRadius="$3xl" shadowOpacity={.4} shadowRadius={2} shadowOffset={{ height: 5, width: 0 }}>
+            <Box>
+              <Text color={Colors.WHITE} bold fontSize="$2xl">
+                Sunday Services:
+              </Text>
+            </Box>
+            <VStack space="xs">
+              <HStack justifyContent="space-between">
+                <Text color={Colors.WHITE} fontSize="$lg">
+                  Connect Groups
+                </Text>
+                <Text color={Colors.WHITE} fontSize="$lg" bold>
+                  9:00am
+                </Text>
+              </HStack>
+              <HStack justifyContent="space-between">
+                <Text color={Colors.WHITE} fontSize="$lg">
+                  Worship Service
+                </Text>
+                <Text color={Colors.WHITE} fontSize="$lg" bold>
+                  10:00am
+                </Text>
+              </HStack>
+              <HStack justifyContent="space-between">
+                <Text color={Colors.WHITE} fontSize="$lg">
+                  Spanish Speaking Service
+                </Text>
+                <Text color={Colors.WHITE} fontSize="$lg" bold>
+                  2:00pm
+                </Text>
+              </HStack>
+              <Button mt="$2" variant="outline" borderColor="white" borderWidth={3} onPress={handleWatchOnline}>
+                <Text color="white" >
+                  Watch Online
+                </Text>
+              </Button>
+            </VStack>
+          </VStack>
+        </VStack>
       </ScrollView>
     </MainContainer >
   );

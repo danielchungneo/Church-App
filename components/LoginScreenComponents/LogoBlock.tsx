@@ -14,7 +14,7 @@ function LogoBlock({ }: LogoBlockProps) {
             >
                 <Box borderRadius="$3xl" flex={1} width="$full" height="$full" overflow="hidden">
 
-                    <Box flex={1} justifyContent="center" height alignItems="center" width="$full" >
+                    <Box flex={1} justifyContent="center" alignItems="center" width="$full" >
 
                         <Image alt="logo" width="85%" height="85%" source={require('../../assets/images/good-naz-logo.png')} />
                     </Box>

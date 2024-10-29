@@ -19,7 +19,10 @@ function HomeEventCard({ uri, title }: HomeEventCardProps) {
                         <Text fontSize="$xl" bold color={Colors.BLUE}>
                             {title || "Worship Night"}
                         </Text>
-                        <Text fontSize="$sm" bold color={Colors.BLUE} numberOfLines={3}>
+                        <Text fontSize="$sm" bold color={Colors.BLUE}>
+                            10/18/24
+                        </Text>
+                        <Text fontSize="$sm" color={Colors.BLUE} numberOfLines={3}>
                             Here is a description of the event and there will also be an arrow so you can view more details Here is a description of the event and there will also be an arrow so you can view more details 
                         </Text>
                         <Box alignItems="flex-end" >

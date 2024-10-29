@@ -17,7 +17,8 @@ export const Colors =
     GOLD: "#f6a92d",
     BRONZE: "#cd7f32",
     INFORMATION: "$indigo600",
-    LIGHT_GRAY: "#282828",
+    LIGHT_GRAY: "#d3d3d3",
+    WHITE: "#ffffff",
 }
 
 

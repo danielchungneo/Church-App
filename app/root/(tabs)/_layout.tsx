@@ -15,13 +15,13 @@ import { USER_ROLES } from "@/enum/Roles";
 import useGetRequest from "@/hooks/useGetRequest";
 import api from "@/constants/api";
 import { PortalProvider } from "@gorhom/portal";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 
 
 
 
 function TabBarIcon({ iconLibrary = "FontAwesome", ...props }: {
-  iconLibrary?: "FontAwesome" | "FontAwesome5" | "MaterialCommunityIcons";
+  iconLibrary?: "FontAwesome" | "FontAwesome5" | "MaterialCommunityIcons" | "MaterialIcons";
   name: React.ComponentProps<typeof FontAwesome | typeof FontAwesome5>["name"];
   color: string;
 }) {
@@ -29,9 +29,11 @@ function TabBarIcon({ iconLibrary = "FontAwesome", ...props }: {
     return <FontAwesome5 size={18} style={{ marginBottom: -3 }} {...props} />;
   } else if (iconLibrary === "MaterialCommunityIcons") {
     return <MaterialCommunityIcons size={23} style={{ marginBottom: -3 }} {...props} />;
+  } else if (iconLibrary === "MaterialIcons") {
+    return <MaterialIcons size={23} style={{ marginBottom: -3 }} {...props} />;
   }
     else {
-    return <FontAwesome size={18} style={{ marginBottom: -3 }} {...props} />;
+    return <FontAwesome size={23} style={{ marginBottom: -3 }} {...props} />;
   }
 }
 
@@ -87,12 +89,24 @@ export default function TabLayout({ }: TabLayoutProps) {
         <Tabs.Screen
           name="home"
           options={{
-            title: "Events",
+            title: "Welcome",
             headerTitleStyle: {
               color: Colors.TEXT,
             },
 
             tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
+            tabBarLabel: "Home",
+          }}
+        />
+        <Tabs.Screen
+          name="events"
+          options={{
+            title: "Events",
+            headerTitleStyle: {
+              color: Colors.TEXT,
+            },
+
+            tabBarIcon: ({ color }) => <TabBarIcon name="event" color={color} iconLibrary="MaterialIcons"/>,
             tabBarLabel: "Events",
           }}
         />
